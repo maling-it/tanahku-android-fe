@@ -5,10 +5,11 @@
     android:layout_height="match_parent"
     tools:context=".beranda.BerandaFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:text="@string/beranda" />
+    <include android:id="@+id/mapContainer"
+        layout="@layout/map_container"/>
 
 </FrameLayout>

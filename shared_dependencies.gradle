@@ -1,0 +1,32 @@
+
+dependencies {
+    //Livedata
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.7.0"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.7.0"
+
+    //lottie
+    implementation "com.airbnb.android:lottie:5.2.0"
+
+    //shimmer layout
+    implementation 'com.facebook.shimmer:shimmer:0.5.0'
+
+    //Glide
+    implementation 'com.github.bumptech.glide:glide:4.13.2'
+
+    //Youtube
+    implementation 'com.pierfrancescosoffritti.androidyoutubeplayer:core:12.1.0'
+
+    //Circle ImageView
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
+
+    //
+    implementation "androidx.activity:activity-ktx:1.8.2"
+    implementation "androidx.fragment:fragment-ktx:1.6.2"
+
+    //hilt
+//    implementation ("com.google.dagger:hilt-android:2.44")
+//    ksp ("com.google.dagger:hilt-android-compiler:2.44")
+
+    //koin
+    implementation "io.insert-koin:koin-android:2.2.3"
+}

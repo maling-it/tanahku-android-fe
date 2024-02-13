@@ -1,60 +1,146 @@
 package com.tanahku.beranda
 
+import android.location.Geocoder
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.LatLngBounds
+import com.google.android.gms.maps.model.MarkerOptions
 import com.tanahku.R
+import com.tanahku.core.utils.vo.Status
+import com.tanahku.databinding.FragmentBerandaBinding
+import org.koin.android.ext.android.inject
+import java.io.IOException
+import java.util.Locale
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+class BerandaFragment : Fragment(), OnMapReadyCallback {
 
-/**
- * A simple [Fragment] subclass.
- * Use the [BerandaFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class BerandaFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private var _binding: FragmentBerandaBinding? = null
+    private val binding get() = _binding
+    private val viewModelDevice by inject<LocationMapViewModel>()
+    private lateinit var mMap: GoogleMap
+    private val boundsBuilder = LatLngBounds.Builder()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_beranda, container, false)
+        _binding = FragmentBerandaBinding.inflate(inflater, container,false)
+
+        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
+        val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
+        mapFragment.getMapAsync(this)
+        Log.e("tes", "onCreateView: " )
+        return binding?.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment BerandaFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            BerandaFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
+        val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
+        mapFragment.getMapAsync(this)
+        Log.e("tes2", "onViewCreated: " )
+    }
+
+    override fun onMapReady(googleMap: GoogleMap) {
+        mMap = googleMap
+
+        mMap.uiSettings.isZoomControlsEnabled = true
+        mMap.uiSettings.isIndoorLevelPickerEnabled = true
+        mMap.uiSettings.isCompassEnabled = true
+        mMap.uiSettings.isMapToolbarEnabled = true
+        Log.e("tes3", "onMapReady: ", )
+//        getMyLocation()
+        addLocationMarker()
+    }
+
+    private fun getMyLocation() {
+
+    }
+
+    private fun addLocationMarker() {
+        Log.e("tes4", "addLocationMarker: ")
+        viewModelDevice.getDevice().observe(this) { resource ->
+            resource.data?.map { device ->
+                when (resource.status) {
+                    Status.SUCCESS -> {
+                        Log.e("berhasil", "addLocationMarker: $device" )
+                        val latLng = device.latitude?.toDouble()
+                            ?.let { device.longitude?.toDouble()
+                                ?.let { it1 -> LatLng(it, it1) } }
+                        val addresses = device.latitude?.toDouble()
+                            ?.let { device.longitude?.toDouble()?.let { it1 -> getAddress(it, it1) } }
+                        latLng?.let {
+                            MarkerOptions()
+                                .position(it)
+                                .title(device.name)
+                                .snippet(addresses)
+//                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.map_icon))
+                        }?.let {
+                            mMap.addMarker(
+                                it
+                            )
+                        }
+                        mMap.setOnMarkerClickListener {
+//                                val intent = Intent(this@BerandaFragment, DetailActivity::class.java)
+//                                intent.putExtra(Constants.DATA, device)
+//                                startActivity(intent)
+                            true
+                        }
+                        latLng?.let { CameraUpdateFactory.newLatLng(it) }
+                            ?.let { mMap.moveCamera(it) }
+                        if (latLng != null) {
+                            boundsBuilder.include(latLng)
+                        }
+                        val bounds: LatLngBounds = boundsBuilder.build()
+                        mMap.animateCamera(
+                            CameraUpdateFactory.newLatLngBounds(
+                                bounds,
+                                resources.displayMetrics.widthPixels,
+                                resources.displayMetrics.heightPixels,
+                                100
+                            )
+                        )
+
+                    }
+                    Status.LOADING -> {}
+                    Status.ERROR -> {
+                        Log.e("errorGuys", "addLocationMarker: ${resource.message}")
+                    }
+                    else->{
+                        Log.e("tes5", "addLocationMarker: ")
+                    }
                 }
             }
+        }
     }
+
+    private fun getAddress(lat: Double, lon: Double): String? {
+        var address: String? = null
+        val geocoder = Geocoder(this.requireContext(), Locale.getDefault())
+        try {
+            val list = geocoder.getFromLocation(lat, lon, 1)
+            if (list != null && list.size != 0) {
+                address = list[0].getAddressLine(0)
+            }
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
+        return address
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
 }

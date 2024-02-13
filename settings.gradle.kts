@@ -15,3 +15,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "Tanah Ku"
 include(":app")
+include(":core")
