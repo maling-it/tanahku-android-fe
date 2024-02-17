@@ -4,9 +4,28 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.tanahku.core.data.local.entity.AirtempSensorEntity
 import com.tanahku.core.data.local.entity.DeviceEntity
+import com.tanahku.core.data.local.entity.HumidSensorEntity
+import com.tanahku.core.data.local.entity.RainfallSensorEntity
+import com.tanahku.core.data.local.entity.SoilSensorEntity
+import com.tanahku.core.data.local.entity.SoilphSensorEntity
+import com.tanahku.core.data.local.entity.SolarradiationSensorEntity
+import com.tanahku.core.data.local.entity.WindSensorEntity
 
-@Database(entities = [DeviceEntity::class], version = 1, exportSchema = false)
+@Database(
+    entities = [
+        DeviceEntity::class,
+        WindSensorEntity::class,
+        SoilSensorEntity::class,
+        HumidSensorEntity::class,
+        AirtempSensorEntity::class,
+        RainfallSensorEntity::class,
+        SoilphSensorEntity::class,
+        SolarradiationSensorEntity::class],
+    version = 1,
+    exportSchema = false
+)
 abstract class DeviceDatabase : RoomDatabase() {
 
     abstract fun deviceDao(): DeviceDao

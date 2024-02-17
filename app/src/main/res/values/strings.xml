@@ -9,4 +9,11 @@
 
     <string name="tanah_ku">Tanah ku</string>
     <string name="map">Map</string>
+    <string name="data_windspeed_sensor">Data Windspeed Sensor</string>
+    <string name="data_soil_moisture">Data Soil Moisture</string>
+    <string name="data_humid_sensor">Data Humid Sensor</string>
+    <string name="air_temperature_sensor">Air Temperature Sensor</string>
+    <string name="rainfall_intensity">Rainfall Intensity</string>
+    <string name="soil_ph_sensor">Soil Ph Sensor</string>
+    <string name="solar_radiation_sensor">Solar Radiation Sensor</string>
 </resources>

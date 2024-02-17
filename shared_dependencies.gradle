@@ -29,4 +29,15 @@ dependencies {
 
     //koin
     implementation "io.insert-koin:koin-android:2.2.3"
+
+    //retrofit
+    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation ("com.squareup.okhttp3:logging-interceptor:4.9.3")
+
+    //android chart
+    implementation ("com.github.PhilJay:MPAndroidChart:v3.1.0")
+
+    implementation ("joda-time:joda-time:2.10.13")
+
 }
