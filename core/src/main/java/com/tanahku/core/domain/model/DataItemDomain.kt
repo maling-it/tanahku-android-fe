@@ -4,7 +4,7 @@ import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class DataItem(
+data class DataItemDomain(
     val apiKey: String? = null,
     val latitude: String? = null,
     val name: String? = null,
