@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="bgButton" format="reference|color" />
+    <attr name="bgIcon" format="reference|color" />
+    <attr name="bgItem" format="reference|color" />
+    <attr name="bgToolbar" format="reference|color"/>
+</resources>

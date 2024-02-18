@@ -1,6 +1,9 @@
 package com.tanahku.beranda
 
+import android.content.Context
 import android.content.Intent
+import android.content.res.Configuration
+import android.content.res.Resources
 import android.graphics.drawable.Drawable
 import android.location.Geocoder
 import android.os.Bundle
@@ -8,6 +11,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -16,6 +20,7 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.LatLngBounds
+import com.google.android.gms.maps.model.MapStyleOptions
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.gson.Gson
 import com.tanahku.R
@@ -27,6 +32,7 @@ import com.tanahku.detail.DetailActivity
 import org.koin.android.ext.android.inject
 import java.io.IOException
 import java.util.Locale
+
 
 class BerandaFragment : Fragment(), OnMapReadyCallback {
 
@@ -54,15 +60,25 @@ class BerandaFragment : Fragment(), OnMapReadyCallback {
         mapFragment.getMapAsync(this)
         binding?.buttonSet?.setOnClickListener {
             isShow = !isShow
-            val drawable: Drawable? = resources.getDrawable(R.drawable.baseline_close_24)
-            if(isShow){
+            if (isShow) {
+                val close: Drawable? = context?.let { it1 ->
+                    ContextCompat.getDrawable(
+                        it1,
+                        R.drawable.baseline_close_24
+                    )
+                }
                 binding?.rvDevice?.visibility = View.VISIBLE
-                binding?.buttonSet?.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null)
+                binding?.buttonSet?.setCompoundDrawablesWithIntrinsicBounds(close, null, null, null)
                 showRv()
-            }
-            else {
+            } else {
+                val list: Drawable? = context?.let { it1 ->
+                    ContextCompat.getDrawable(
+                        it1,
+                        R.drawable.icon_list_device
+                    )
+                }
                 binding?.rvDevice?.visibility = View.GONE
-                binding?.buttonSet?.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
+                binding?.buttonSet?.setCompoundDrawablesWithIntrinsicBounds(list, null, null, null)
             }
         }
         Log.e("tampil", "onViewCreated: $isShow")
@@ -90,7 +106,35 @@ class BerandaFragment : Fragment(), OnMapReadyCallback {
         mMap.uiSettings.isCompassEnabled = true
         mMap.uiSettings.isMapToolbarEnabled = true
 
+        changeTheme(googleMap)
         addLocationMarker()
+    }
+
+    fun isDarkMode(context: Context?): Boolean {
+        val currentNightMode = context?.resources?.configuration?.uiMode?.and(Configuration.UI_MODE_NIGHT_MASK)
+        return currentNightMode == Configuration.UI_MODE_NIGHT_YES
+    }
+
+    private fun changeTheme(googleMap: GoogleMap) {
+        try {
+            // Customise the styling of the base map using a JSON object defined
+            // in a raw resource file.
+            if(isDarkMode(context)){
+                val success: Boolean = googleMap.setMapStyle(
+                    context?.let {
+                        MapStyleOptions.loadRawResourceStyle(
+                            it, R.raw.style_json
+                        )
+                    }
+                )
+                if (!success) {
+                    Log.e("style", "Style parsing failed.")
+                }
+            }
+
+        } catch (e: Resources.NotFoundException) {
+            Log.e("fail", "Can't find style. Error: ", e)
+        }
     }
 
     private fun showRv() {

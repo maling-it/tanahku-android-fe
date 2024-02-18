@@ -14,8 +14,7 @@
         android:text="@string/location"
         android:layout_margin="10dp"
         android:textStyle="bold"
-        android:textSize="16sp"
-        android:textColor="@color/black"
+        android:textSize="14sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
     <TextView
@@ -27,9 +26,9 @@
         android:paddingEnd="16dp"
         android:paddingBottom="16dp"
         android:maxLines="5"
-        android:textSize="14sp"
+        android:fontFamily="@font/poppins_light"
+        android:textSize="11sp"
         android:text="@string/full_location_addreess"
-        android:textColor="#5E5D5D"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
