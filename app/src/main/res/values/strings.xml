@@ -16,4 +16,7 @@
     <string name="rainfall_intensity">Rainfall Intensity</string>
     <string name="soil_ph_sensor">Soil Ph Sensor</string>
     <string name="solar_radiation_sensor">Solar Radiation Sensor</string>
+    <string name="location">Location</string>
+    <string name="full_location_addreess">full location addreess</string>
+    <string name="lihat_daftar_lokasi">Lihat daftar Lokasi</string>
 </resources>
