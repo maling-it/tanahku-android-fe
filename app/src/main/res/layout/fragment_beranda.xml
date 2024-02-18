@@ -1,15 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".beranda.BerandaFragment">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/beranda" />
     <include android:id="@+id/mapContainer"
         layout="@layout/map_container"/>
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/buttonSet"
+        app:layout_constraintTop_toTopOf="@id/mapContainer"
+        app:layout_constraintStart_toStartOf="@id/mapContainer"
+        android:text="@string/lihat_daftar_lokasi"
+        android:textSize="14sp"
+        android:padding="18dp"
+        android:textAllCaps="false"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="2dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/bg_rv_location_list"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_device"
+        app:layout_constraintStart_toStartOf="@id/mapContainer"
+        app:layout_constraintTop_toBottomOf="@id/buttonSet"
+        app:layout_constraintEnd_toEndOf="@id/mapContainer"
+        tools:listitem="@layout/item_device"
+        android:visibility="gone"
+        android:layout_margin="16dp"
+        android:padding="14dp"
+        android:background="@drawable/bg_rv_location_list"
+        android:layout_width="match_parent"
+        android:layout_height="170dp"/>
 
-</FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

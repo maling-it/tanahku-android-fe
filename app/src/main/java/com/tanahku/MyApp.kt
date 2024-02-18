@@ -2,6 +2,7 @@ package com.tanahku
 
 import android.app.Application
 import com.tanahku.core.di.repository
+import com.tanahku.di.adapter
 import com.tanahku.di.useCaseModule
 import com.tanahku.di.viewModel
 import org.koin.android.ext.koin.androidContext
@@ -19,7 +20,8 @@ class MyApp : Application() {
                 listOf(
                     useCaseModule,
                     repository,
-                    viewModel
+                    viewModel,
+                    adapter
                 )
             )
         }
