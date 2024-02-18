@@ -4,12 +4,20 @@
     android:layout_width="match_parent"
     android:layout_height="140dp"
     android:gravity="bottom"
-    android:background="#035704"
+    android:background="?bgToolbar"
     android:orientation="vertical"
     android:paddingLeft="16dp"
     android:paddingTop="16dp"
     android:paddingRight="16dp"
     android:paddingBottom="16dp"
     tools:ignore="Overdraw">
+    <ImageView
+        android:id="@+id/imageLogoDrawer"
+        android:layout_gravity="center"
+        android:contentDescription="@string/image_logo"
+        android:layout_width="wrap_content"
+        android:src="@drawable/logo_"
+        android:padding="16dp"
+        android:layout_height="wrap_content"/>
 
 </LinearLayout>

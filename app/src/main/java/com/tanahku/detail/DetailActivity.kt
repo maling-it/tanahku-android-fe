@@ -1,5 +1,7 @@
 package com.tanahku.detail
 
+import android.content.Context
+import android.content.res.Configuration
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
@@ -101,10 +103,19 @@ class DetailActivity : AppCompatActivity() {
         barEntriesList = ArrayList()
         val xAxis = barChart.xAxis
         xAxis.position = XAxis.XAxisPosition.BOTTOM
-        xAxis.textSize = 14f
+        xAxis.textSize = 11f
         xAxis.setDrawGridLines(false)
         xAxis.labelRotationAngle = -45f
         xAxis.granularity = 1f
+        if(isDarkMode(this)){
+            xAxis.textColor = ContextCompat.getColor(this, R.color.white)
+            xAxis.axisLineColor = ContextCompat.getColor(this, R.color.white)
+            barChart.axisLeft.textColor = ContextCompat.getColor(this, R.color.white)
+        }else {
+            xAxis.textColor = ContextCompat.getColor(this, R.color.black)
+            xAxis.axisLineColor = ContextCompat.getColor(this, R.color.black)
+            barChart.axisLeft.textColor = ContextCompat.getColor(this, R.color.black)
+        }
         //iterasi data
         data.forEachIndexed { index, pair ->
             pair.second?.let { BarEntry(index.toFloat(), it.toFloat()) }
@@ -138,6 +149,12 @@ class DetailActivity : AppCompatActivity() {
         barChart.invalidate()
 
     }
+
+    fun isDarkMode(context: Context?): Boolean {
+        val currentNightMode = context?.resources?.configuration?.uiMode?.and(Configuration.UI_MODE_NIGHT_MASK)
+        return currentNightMode == Configuration.UI_MODE_NIGHT_YES
+    }
+
 
     private fun setAppBar() {
         setSupportActionBar(binding.toolbar)

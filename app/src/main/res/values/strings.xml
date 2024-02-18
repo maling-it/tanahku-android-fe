@@ -18,5 +18,7 @@
     <string name="solar_radiation_sensor">Solar Radiation Sensor</string>
     <string name="location">Location</string>
     <string name="full_location_addreess">full location addreess</string>
-    <string name="lihat_daftar_lokasi">Lihat daftar Lokasi</string>
+    <string name="lihat_daftar_lokasi">  Lihat daftar Lokasi</string>
+    <string name="image_logo">Image Logo</string>
+    <string name="about">About</string>
 </resources>
