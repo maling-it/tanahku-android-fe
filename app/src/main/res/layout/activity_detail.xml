@@ -12,176 +12,222 @@
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appBarr"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize">
+            app:layout_constraintTop_toTopOf="parent">
+
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
-                android:background="?bgToolbar"
                 android:layout_height="?attr/actionBarSize"
+                android:background="?bgToolbar"
                 app:titleTextColor="@color/white" />
 
         </com.google.android.material.appbar.AppBarLayout>
 
-        <TextView
-            android:id="@+id/windSpeedTitle"
+        <LinearLayout
+            android:id="@+id/windLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/bg_item_list_device"
             android:layout_margin="16dp"
-            android:text="@string/data_windspeed_sensor"
-            android:textSize="16sp"
-            android:textStyle="bold"
+            android:padding="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/appBarr" />
+            app:layout_constraintTop_toBottomOf="@id/appBarr">
 
-        <com.github.mikephil.charting.charts.BarChart
-            android:id="@+id/windGraphView"
-            app:layout_constraintTop_toBottomOf="@id/windSpeedTitle"
-            app:layout_constraintStart_toStartOf="@id/windSpeedTitle"
-            app:layout_constraintEnd_toEndOf="@id/windSpeedTitle"
-            app:layout_constraintBottom_toTopOf="@id/soilTitle"
-            android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:paddingBottom="20dp"
-            android:layout_alignParentTop="true" />
+            <TextView
+                android:id="@+id/windSpeedTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:text="@string/data_windspeed_sensor"
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/soilTitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:text="@string/data_soil_moisture"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@id/windGraphView"
-            app:layout_constraintStart_toStartOf="@id/windGraphView"
-            app:layout_constraintTop_toBottomOf="@id/windGraphView" />
-
-        <com.github.mikephil.charting.charts.BarChart
-            android:id="@+id/soilGraph"
-            app:layout_constraintTop_toBottomOf="@id/soilTitle"
-            app:layout_constraintStart_toStartOf="@id/soilTitle"
-            app:layout_constraintEnd_toEndOf="@id/soilTitle"
-            android:layout_width="match_parent"
-            android:layout_height="400dp"
-            android:layout_alignParentTop="true" />
+            <com.github.mikephil.charting.charts.BarChart
+                android:id="@+id/windGraphView"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:paddingBottom="20dp" />
+        </LinearLayout>
 
 
-        <TextView
-            android:id="@+id/humidTitle"
+        <LinearLayout
+            android:id="@+id/soilLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/bg_item_list_device"
             android:layout_margin="16dp"
-            android:text="@string/data_humid_sensor"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@id/soilGraph"
-            app:layout_constraintStart_toStartOf="@id/soilGraph"
-            app:layout_constraintTop_toBottomOf="@id/soilGraph" />
+            android:padding="10dp"
+            app:layout_constraintEnd_toEndOf="@id/windLayout"
+            app:layout_constraintStart_toStartOf="@id/windLayout"
+            app:layout_constraintTop_toBottomOf="@id/windLayout">
 
-        <com.github.mikephil.charting.charts.BarChart
-            android:id="@+id/humidGraph"
-            app:layout_constraintTop_toBottomOf="@id/humidTitle"
-            app:layout_constraintStart_toStartOf="@id/humidTitle"
-            app:layout_constraintEnd_toEndOf="@id/humidTitle"
-            android:layout_width="match_parent"
-            android:layout_height="400dp"
-            android:layout_alignParentTop="true" />
+            <TextView
+                android:id="@+id/soilTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:text="@string/data_soil_moisture"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <com.github.mikephil.charting.charts.BarChart
+                android:id="@+id/soilGraph"
+                android:layout_width="match_parent"
+                android:layout_height="400dp" />
+        </LinearLayout>
 
 
-        <TextView
-            android:id="@+id/airtempTitle"
+        <LinearLayout
+            android:id="@+id/humidLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/bg_item_list_device"
             android:layout_margin="16dp"
-            android:text="@string/air_temperature_sensor"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@id/humidGraph"
-            app:layout_constraintStart_toStartOf="@id/humidGraph"
-            app:layout_constraintTop_toBottomOf="@id/humidGraph" />
+            android:padding="10dp"
+            app:layout_constraintEnd_toEndOf="@id/soilLayout"
+            app:layout_constraintStart_toStartOf="@id/soilLayout"
+            app:layout_constraintTop_toBottomOf="@id/soilLayout">
 
-        <com.github.mikephil.charting.charts.BarChart
-            android:id="@+id/airtempGraph"
-            app:layout_constraintTop_toBottomOf="@id/airtempTitle"
-            app:layout_constraintStart_toStartOf="@id/airtempTitle"
-            app:layout_constraintEnd_toEndOf="@id/airtempTitle"
-            android:layout_width="match_parent"
-            android:layout_height="400dp"
-            android:layout_alignParentTop="true" />
+            <TextView
+                android:id="@+id/humidTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:text="@string/data_humid_sensor"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <com.github.mikephil.charting.charts.BarChart
+                android:id="@+id/humidGraph"
+                android:layout_width="match_parent"
+                android:layout_height="400dp" />
+
+        </LinearLayout>
 
 
-
-        <TextView
-            android:id="@+id/rainfallTitle"
+        <LinearLayout
+            android:id="@+id/airtempLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/bg_item_list_device"
             android:layout_margin="16dp"
-            android:text="@string/rainfall_intensity"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@id/airtempGraph"
-            app:layout_constraintStart_toStartOf="@id/airtempGraph"
-            app:layout_constraintTop_toBottomOf="@id/airtempGraph" />
+            android:padding="10dp"
+            app:layout_constraintEnd_toEndOf="@id/humidLayout"
+            app:layout_constraintStart_toStartOf="@id/humidLayout"
+            app:layout_constraintTop_toBottomOf="@id/humidLayout">
 
-        <com.github.mikephil.charting.charts.BarChart
-            android:id="@+id/rainfallGraph"
-            app:layout_constraintTop_toBottomOf="@id/rainfallTitle"
-            app:layout_constraintStart_toStartOf="@id/rainfallTitle"
-            app:layout_constraintEnd_toEndOf="@id/rainfallTitle"
-            android:layout_width="match_parent"
-            android:layout_height="400dp"
-            android:layout_alignParentTop="true" />
+            <TextView
+                android:id="@+id/airtempTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:text="@string/air_temperature_sensor"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <com.github.mikephil.charting.charts.BarChart
+                android:id="@+id/airtempGraph"
+                android:layout_width="match_parent"
+                android:layout_height="400dp" />
+
+        </LinearLayout>
 
 
-
-        <TextView
-            android:id="@+id/soilphTitle"
+        <LinearLayout
+            android:id="@+id/rainfallLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/bg_item_list_device"
             android:layout_margin="16dp"
-            android:text="@string/soil_ph_sensor"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@id/rainfallGraph"
-            app:layout_constraintStart_toStartOf="@id/rainfallGraph"
-            app:layout_constraintTop_toBottomOf="@id/rainfallGraph" />
+            android:padding="10dp"
+            app:layout_constraintEnd_toEndOf="@id/airtempLayout"
+            app:layout_constraintStart_toStartOf="@id/airtempLayout"
+            app:layout_constraintTop_toBottomOf="@id/airtempLayout">
 
-        <com.github.mikephil.charting.charts.BarChart
-            android:id="@+id/soilphGraph"
-            app:layout_constraintTop_toBottomOf="@id/soilphTitle"
-            app:layout_constraintStart_toStartOf="@id/soilphTitle"
-            app:layout_constraintEnd_toEndOf="@id/soilphTitle"
-            android:layout_width="match_parent"
-            android:layout_height="400dp"
-            android:layout_alignParentTop="true" />
+            <TextView
+                android:id="@+id/rainfallTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:text="@string/rainfall_intensity"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <com.github.mikephil.charting.charts.BarChart
+                android:id="@+id/rainfallGraph"
+                android:layout_width="match_parent"
+                android:layout_height="400dp" />
+
+        </LinearLayout>
 
 
-
-        <TextView
-            android:id="@+id/solarradiationTitle"
+        <LinearLayout
+            android:id="@+id/soilphLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/bg_item_list_device"
             android:layout_margin="16dp"
-            android:text="@string/solar_radiation_sensor"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@id/soilphGraph"
-            app:layout_constraintStart_toStartOf="@id/soilphGraph"
-            app:layout_constraintTop_toBottomOf="@id/soilphGraph" />
+            android:padding="10dp"
+            app:layout_constraintEnd_toEndOf="@id/rainfallLayout"
+            app:layout_constraintStart_toStartOf="@id/rainfallLayout"
+            app:layout_constraintTop_toBottomOf="@id/rainfallLayout">
 
-        <com.github.mikephil.charting.charts.BarChart
-            android:id="@+id/solarradiationGraph"
-            app:layout_constraintTop_toBottomOf="@id/solarradiationTitle"
-            app:layout_constraintStart_toStartOf="@id/solarradiationTitle"
-            app:layout_constraintEnd_toEndOf="@id/solarradiationTitle"
+            <TextView
+                android:id="@+id/soilphTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:text="@string/soil_ph_sensor"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <com.github.mikephil.charting.charts.BarChart
+                android:id="@+id/soilphGraph"
+                android:layout_width="match_parent"
+                android:layout_height="400dp" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/solarradiationLayout"
             android:layout_width="match_parent"
-            android:layout_height="400dp"
-            android:layout_alignParentTop="true" />
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/bg_item_list_device"
+            android:layout_margin="16dp"
+            android:padding="10dp"
+            app:layout_constraintEnd_toEndOf="@id/soilphLayout"
+            app:layout_constraintStart_toStartOf="@id/soilphLayout"
+            app:layout_constraintTop_toBottomOf="@id/soilphLayout">
+
+            <TextView
+                android:id="@+id/solarradiationTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:text="@string/solar_radiation_sensor"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <com.github.mikephil.charting.charts.BarChart
+                android:id="@+id/solarradiationGraph"
+                android:layout_width="match_parent"
+                android:layout_height="400dp" />
+
+        </LinearLayout>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </ScrollView>
