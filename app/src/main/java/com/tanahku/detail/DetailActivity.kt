@@ -107,15 +107,6 @@ class DetailActivity : AppCompatActivity() {
         xAxis.setDrawGridLines(false)
         xAxis.labelRotationAngle = -45f
         xAxis.granularity = 1f
-        if(isDarkMode(this)){
-            xAxis.textColor = ContextCompat.getColor(this, R.color.white)
-            xAxis.axisLineColor = ContextCompat.getColor(this, R.color.white)
-            barChart.axisLeft.textColor = ContextCompat.getColor(this, R.color.white)
-        }else {
-            xAxis.textColor = ContextCompat.getColor(this, R.color.black)
-            xAxis.axisLineColor = ContextCompat.getColor(this, R.color.black)
-            barChart.axisLeft.textColor = ContextCompat.getColor(this, R.color.black)
-        }
         //iterasi data
         data.forEachIndexed { index, pair ->
             pair.second?.let { BarEntry(index.toFloat(), it.toFloat()) }
@@ -126,9 +117,6 @@ class DetailActivity : AppCompatActivity() {
         barData = BarData(barDataSet)
         barChart.data = barData
 
-
-        // on below line we are setting color for our bar data set
-        barDataSet.color = ContextCompat.getColor(this, R.color.green)
 
         // on below line we are disable value above
         barDataSet.setDrawValues(false)
@@ -143,6 +131,19 @@ class DetailActivity : AppCompatActivity() {
                 val timeStamp = data.getOrNull(value.toInt())?.first ?: 0
                 return dateFormat.format(Date(timeStamp.toLong()))
             }
+        }
+        if(isDarkMode(this)){
+            xAxis.textColor = ContextCompat.getColor(this, R.color.white)
+            xAxis.axisLineColor = ContextCompat.getColor(this, R.color.white)
+            barChart.axisLeft.textColor = ContextCompat.getColor(this, R.color.white)
+            barChart.axisRight.textColor = ContextCompat.getColor(this, R.color.white)
+            barDataSet.color = ContextCompat.getColor(this, R.color.light_blue)
+        }else {
+            xAxis.textColor = ContextCompat.getColor(this, R.color.black)
+            xAxis.axisLineColor = ContextCompat.getColor(this, R.color.black)
+            barChart.axisLeft.textColor = ContextCompat.getColor(this, R.color.black)
+            barChart.axisRight.textColor = ContextCompat.getColor(this, R.color.black)
+            barDataSet.color = ContextCompat.getColor(this, R.color.green)
         }
 
         // Refresh the chart
