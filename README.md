@@ -1,6 +1,8 @@
 # Tanahku-android-fe
 Android App for IOT Project Tanahku 
 
+Download demo apk  [Link .Apk](https://github.com/maling-it/tanahku-android-fe/releases/download/v1.0.0-beta/app-release.apk)
+
 ## ScreenShoots
 ### Light Theme
 <img src="https://github.com/maling-it/tanahku-android-fe/blob/master/screenshoots/splash_light.png" alt="splash" width="150"/> <img src="https://github.com/maling-it/tanahku-android-fe/blob/master/screenshoots/home_light_1.png" alt="splash" width="150"/> <img src="https://github.com/maling-it/tanahku-android-fe/blob/master/screenshoots/home_light_2.png" alt="splash" width="150"/> <img src="https://github.com/maling-it/tanahku-android-fe/blob/master/screenshoots/drawer_light.png" alt="splash" width="150"/> <img src="https://github.com/maling-it/tanahku-android-fe/blob/master/screenshoots/detail_light.png" alt="splash" width="150"/> 
